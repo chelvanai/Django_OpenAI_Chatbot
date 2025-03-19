@@ -8,7 +8,7 @@ Follow these detailed steps to set up your Django chatbot application.
 pip install -r requirements.txt
 `
 
-## Step 2: Create .env File
+## Step 2: Create .env File in root directory
 
 `
 OPENAI_API=your_secret_key_here
