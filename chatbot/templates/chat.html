@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot</title>
+
+    <link rel="stylesheet" href="{% static 'css/chat.css' %}?v=1">
+    <script src="{% static 'js/chat.js' %}" defer></script>
+
+    <!-- Load bootstrap -->
+    <script src="{% static '/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static '/bootstrap-5.3.3-dist/css/bootstrap.min.css' %}">
+
+    <!-- Load STIX Two Text font for mathematical content -->
+    <link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap"
+          rel="stylesheet">
+
+    <!-- Load Marked.js for Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Load Highlight.js for code highlight -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <!-- Load MathJax for LaTeX rendering -->
+    <script>
+        // Configure MathJax
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                packages: ['base', 'ams', 'noerrors', 'noundefined']
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+                renderActions: {
+                    addMenu: [],
+                    checkLoading: []
+                }
+            },
+            startup: {
+                pageReady: () => {
+                    return MathJax.startup.defaultPageReady().then(() => {
+                        console.log('MathJax initial typesetting complete');
+                    });
+                }
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Load Jquery for api handling -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="wrapper">
+    <div id="leftNav">
+        <button id="newChatButton">New Chat</button>
+        <div id="labelsListContainer">
+            <ul id="labelsList">
+            </ul>
+        </div>
+        <div id="navButtonsContainer">
+            <button id="settingsButton">Settings</button>
+            <button id="logoutButton">Logout</button>
+        </div>
+    </div>
+    <div id="chatContainer">
+        <div id="chatMessages" class="d-flex flex-column"></div>
+        <div id="inputArea">
+            {% csrf_token %}
+            <textarea id="userInput" placeholder="Ask anything" class="form-control" style="height: 50px;"></textarea>
+            <button id="sendButton">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="lucide lucide-send">
+                    <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/>
+                    <path d="M21.854 2.147l-10.94 10.939"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

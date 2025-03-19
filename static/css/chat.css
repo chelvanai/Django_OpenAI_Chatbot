@@ -1,0 +1,268 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+#wrapper {
+    display: flex;
+    height: 100%;
+}
+
+#leftNav {
+    width: 250px; /* Fixed width for the sidebar */
+    height: 100%; /* Full height of the view */
+    position: fixed; /* Fixed position */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    background-color: #f0f0f0; /* Light grey background */
+    padding-top: 10px; /* Padding at the top */
+    box-sizing: border-box; /* Border box for proper sizing */
+    display: flex; /* Add display flex */
+    flex-direction: column; /* Set flex direction to column */
+}
+
+#labelsListContainer {
+    flex: 1; /* Take up remaining space */
+    overflow-y: auto; /* Add a vertical scrollbar */
+}
+
+#chatContainer {
+    margin-left: 250px; /* Sidebar space */
+    width: calc(100% - 200px); /* Remaining width */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+}
+
+#chatMessages {
+    overflow-y: auto;
+    padding: 10px;
+    flex-grow: 1;
+    background-color: #fff;
+    width: 100%; /* Ensures full width for alignment control */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chat-message {
+    padding: 8px 15px;
+    margin-bottom: 8px;
+    border-radius: 18px;
+    background-color: #ebebeb;
+    width: 75%;
+    word-wrap: break-word;
+    text-align: left;
+}
+
+.user-message {
+    background-color: #ccc;
+    border: 1px solid #ccc;
+    white-space: pre-wrap; /* Preserve new lines for user input */
+}
+
+.bot-message {
+    background-color: #ffffff;
+    white-space: normal; /* Avoid extra spacing with <br> */
+}
+
+
+#inputArea {
+    width: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Align items vertically */
+    padding: 10px;
+    position: relative;
+}
+
+#userInput {
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    padding: 10px 40px 10px 10px; /* Leave space for the button */
+    border-radius: 4px;
+    resize: vertical; /* Allow vertical resizing only */
+    overflow: auto; /* Ensure scrollbar if needed */
+}
+
+#sendButton {
+    width: 30px; /* Adjust as needed */
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+#sendButton svg {
+    width: 20px; /* Adjust the size */
+    height: 20px;
+}
+
+
+.code-snippet {
+    position: relative;
+    background-color: #f5f5f5;
+    padding: 1rem; /* Adjust based on your design needs */
+    padding-top: 2.5rem; /* Enough vertical padding to accommodate the button */
+    border-radius: 5px;
+    overflow: visible; /* Change this if set to 'hidden' to prevent clipping */
+    box-sizing: border-box; /* Ensures padding is included in the width/height */
+}
+
+pre {
+    display: block;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    overflow: auto;
+    font-size: .875em;
+    position: relative; /* Ensure pre tag can serve as a reference point for absolute positioning */
+}
+
+.copy-btn {
+    background-color: #b2cda2;
+    position: absolute; /* Positioning the button absolutely inside the pre */
+    top: 0.1rem; /* Maintain the slight offset from the top */
+    right: 0.1rem; /* Position the button towards the right side */
+}
+
+.code-snippet pre {
+    margin: 0; /* Remove default margin */
+    position: relative; /* Positioned relative to snippet for stacking context */
+    z-index: 1; /* Ensures text is below the button */
+}
+
+pre code {
+    /*background-color: #b43535; !* Light grey background *!*/
+    border: 1px solid #d9a8a8; /* Light grey border */
+    display: block;
+    padding: 10px;
+    overflow-x: auto; /* Enable horizontal scrolling for longer lines */
+    white-space: pre-wrap; /* Allows code to wrap */
+    word-break: break-word; /* Break the word at the edge of the boundary */
+    border-radius: 5px; /* Optional: Rounded corners for the code blocks */
+}
+
+#newChatButton {
+    width: 90%; /* Button will take up 90% of the #leftNav width */
+    padding: 10px 0; /* Padding inside the button */
+    margin: 0 5% 10px 5%; /* Top and bottom margins set to 0, left and right margins set to 5% */
+    background-color: #007bff; /* Bootstrap primary blue */
+    color: white; /* Text color */
+    text-align: center; /* Center the text */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Cursor for the button */
+}
+
+#newChatButton:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+
+#labelsList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 250px; /* Set a width for the list */
+}
+
+#labelsList li {
+    list-style-type: none;
+    padding: 10px;
+    height: 50px;
+    line-height: 50px;
+    overflow: hidden;
+    position: relative;
+    transition: height 0.3s ease; /* Add transition for smooth height change */
+}
+
+#labelsList li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    transition: white-space 0.3s ease; /* Smooth transition for whitespace change */
+}
+
+#labelsList li:hover {
+    height: auto; /* Allow the height to adjust automatically */
+    background-color: #c1e1b1;
+}
+
+#labelsList li:hover a {
+    white-space: normal; /* Allow text to wrap, show full text */
+    overflow: visible; /* Ensure complete text visibility */
+    line-height: normal; /* Reset line height if needed */
+}
+
+
+#navButtonsContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+
+#navButtonsContainer button {
+    background-color: #f0f0f0;
+    color: #333;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+#navButtonsContainer button:hover {
+    background-color: #ddd;
+}
+
+code {
+  font-size: .875em;
+  color: seashell;
+  word-wrap: break-word;
+}
+
+table {
+    border-collapse: collapse; /* Changes to collapse to enhance line visibility */
+    width: 100%;
+    margin: 15px 0;
+    border: 1px solid #ccc;
+    font-family: 'Arial', sans-serif;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #ddd; /* Add full border to clearly define columns */
+}
+
+th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+td {
+    color: #333;
+    vertical-align: middle;
+}

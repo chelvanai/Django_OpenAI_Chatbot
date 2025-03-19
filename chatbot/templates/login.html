@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <script src="{% static '/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static '/bootstrap-5.3.3-dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '/css/login.css' %}?v=1">
+</head>
+<body>
+<div class="form-container">
+    <form method="post" class="form-group">
+        {% csrf_token %}
+        <h2 class="text-center mb-4">OpenAI Chatbot Login</h2>
+        <div class="mb-3">
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" name="username" id="username" class="form-control" aria-describedby="usernameHelp"
+                   placeholder="Enter your username">
+
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" name="password" id="password" class="form-control" aria-describedby="passwordHelp"
+                   placeholder="Enter your password">
+
+        </div>
+        <button type="submit" class="btn btn-custom btn-block">Login</button>
+    </form>
+    <br>
+    {% if form.non_field_errors %}
+        <div class="alert alert-danger" role="alert">
+            Incorrect username or password.
+        </div>
+    {% endif %}
+
+</div>
+</body>
+</html>
